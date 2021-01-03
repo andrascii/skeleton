@@ -7,7 +7,7 @@ It used to copy it `as is` to save my time when creating new projects.
 ### Structure: 
 - `skeleton` - main executable target, links with the `common`, `dataapi` and uses its functionality
 - `dataapi` - contains functionality of the project
-- `dataapitests` - tests written using gtest library, tests `dataapi`
+- `dataapitests` - tests written using gtest library, tests `dataapi` and `common`
 - `common` - static library containing common helpful functionality shared between all other targets
 - `dataapi_sanitized` - sanitized version of library, used to linking with `dataapitests_sanitized`
 - `common_sanitized` - sanitized version of library, used to linking with `dataapitests_sanitized`
