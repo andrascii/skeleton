@@ -1,22 +1,9 @@
-#include "Api.h"
 #include "TcpClient.h"
 #include "EchoTcpServer.h"
 
 namespace dataapitests {
 
-TEST(ApiTests, GetSomeNumber1Test) {
-  EXPECT_EQ(dataapi::GetSomeNumber1(), 42);
-}
-
-TEST(ApiTests, GetSomeNumber2Test) {
-  EXPECT_DOUBLE_EQ(dataapi::GetSomeNumber2(), 3.1415);
-}
-
-TEST(ApiTests, HelloWorldTest) {
-  EXPECT_EQ(dataapi::HelloWorld(), "Hello World"s);
-}
-
-TEST(ApiTests, ClientServerTest) {
+TEST(IntegrationTests, ClientServerEchoTest) {
   unsigned short port = 44444;
   dataapi::TcpClient client;
   dataapi::EchoTcpServer server{ port };

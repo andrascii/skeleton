@@ -1,4 +1,3 @@
-#include "Api.h"
 #include "Logger.h"
 #include "Application.h"
 #include "CommandLineParser.h"
