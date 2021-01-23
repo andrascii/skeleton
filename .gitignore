@@ -1,3 +1,6 @@
+xcodebuild
+build-qt-creator
 build
 .vscode
 .DS_Store
+*.user

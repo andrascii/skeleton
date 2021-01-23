@@ -9,4 +9,10 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "Ap
   add_compile_options("-Wno-implicit-fallthrough")
   add_compile_options("-Wno-unused-parameter")
   add_compile_options("-pedantic")
+
+  if (APPLE)
+    # without these options on MacOS ld will show up warnings
+    add_compile_options("-fvisibility-inlines-hidden")
+    add_compile_options("-fvisibility=hidden")
+  endif()
 endif()

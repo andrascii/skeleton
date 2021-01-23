@@ -48,7 +48,7 @@ function(make_coverage_target)
           llvm-cov
           show
           -format=html
-          ./${ARG_TARGET_NAME}
+          ${CMAKE_CURRENT_BINARY_DIR}/${ARG_TARGET_NAME}
           -instr-profile=${ARG_TARGET_NAME}.profdata
           --show-line-counts-or-regions
           -Xdemangler=c++filt
@@ -59,7 +59,7 @@ function(make_coverage_target)
         COMMAND ${XCRUN}
           llvm-cov
           report
-          ./${ARG_TARGET_NAME}
+          ${CMAKE_CURRENT_BINARY_DIR}/${ARG_TARGET_NAME}
           -instr-profile=${ARG_TARGET_NAME}.profdata
           -Xdemangler=c++filt
       )

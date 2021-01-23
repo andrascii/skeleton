@@ -35,6 +35,13 @@
 #include <gmock/gmock.h>
 
 //
+// Boost
+//
+#include <boost/asio.hpp>
+#include <boost/thread.hpp>
+#include <boost/bind/placeholders.hpp>
+
+//
 // Spdlog
 //
 #include <spdlog/logger.h>

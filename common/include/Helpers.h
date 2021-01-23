@@ -2,6 +2,9 @@
 
 namespace common {
 
-class Helpers {};
+class Helpers {
+ public:
+  static auto SetCurrentThreadName(const std::string& name) noexcept -> void;
+};
 
 }

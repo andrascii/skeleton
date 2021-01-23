@@ -25,7 +25,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # deps packages
 #
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost COMPONENTS program_options REQUIRED)
+find_package(Boost COMPONENTS thread program_options REQUIRED)
 find_package(GTest REQUIRED)
 find_package(spdlog REQUIRED)
 

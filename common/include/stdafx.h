@@ -41,3 +41,12 @@
 
 using namespace std::chrono_literals;
 using namespace std::string_literals;
+
+#ifdef _WIN32
+#define USE_WINDOWS_SET_THREAD_NAME_HACK
+#include <windows.h>
+#elif defined(__APPLE__)
+#include <pthread.h>
+#else
+#include <sys/prctl.h>
+#endif
