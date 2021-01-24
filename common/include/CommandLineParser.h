@@ -2,7 +2,7 @@
 
 #include "CommandLineArgument.h"
 
-namespace dataapi {
+namespace common {
 
 class CommandLineParser final {
  public:

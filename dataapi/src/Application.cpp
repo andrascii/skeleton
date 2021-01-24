@@ -67,8 +67,8 @@ auto Application::StartEchoClient() const noexcept -> std::error_code {
 }
 
 auto Application::StartEchoServer() const noexcept -> std::error_code {
-  EchoTcpServer server{ port_ };
-  server.Start();
+  std::unique_ptr<IServer> server = std::make_unique<EchoTcpServer>(port_);
+  server->Start();
   std::this_thread::sleep_for(3600s);
 
   return MakeSuccessError();

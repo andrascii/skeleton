@@ -1,6 +1,6 @@
 #pragma once
 
-namespace dataapi {
+namespace common {
 
 class CommandLineArgument final {
  public:

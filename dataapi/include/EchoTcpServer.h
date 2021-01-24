@@ -1,16 +1,17 @@
 #pragma once
 
+#include "IServer.h"
 #include "IConnection.h"
 
 namespace dataapi {
 
-class EchoTcpServer {
+class EchoTcpServer : public IServer {
  public:
   explicit EchoTcpServer(unsigned short port);
   ~EchoTcpServer();
 
-  auto Start() noexcept -> void;
-  auto Stop() noexcept -> void;
+  auto Start() noexcept -> void override;
+  auto Stop() noexcept -> void override;
 
  private:
   auto Accept() noexcept -> void;

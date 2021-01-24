@@ -1,6 +1,6 @@
 #include "CommandLineArgument.h"
 
-namespace dataapi {
+namespace common {
 
 CommandLineArgument::CommandLineArgument(const std::string& short_name,
                                          const std::string& verbose_name,

@@ -1,6 +1,6 @@
 #include "CommandLineParser.h"
 
-namespace dataapi {
+namespace common {
 
 auto CommandLineParser::Parse(int& argc, char** argv) -> void {
   for (const auto& argument : arguments_) {
