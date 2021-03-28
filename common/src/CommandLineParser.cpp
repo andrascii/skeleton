@@ -6,7 +6,7 @@ auto CommandLineParser::Parse(int& argc, char** argv) -> void {
   for (const auto& argument : arguments_) {
     options_description_.add_options()
       (
-        Formatted(argument).data(),
+        argument.Name().data(),
         ArgumentMeta(argument),
         argument.Description().data()
       );
@@ -25,18 +25,15 @@ auto CommandLineParser::AddArgument(const CommandLineArgument& argument) -> void
 }
 
 auto CommandLineParser::ArgumentValue(const CommandLineArgument& argument) const -> std::string {
-  if (variables_map_.count(argument.ShortName().data())) {
-    return variables_map_[argument.ShortName().data()].as<std::string>();
-  } else if (variables_map_.count(argument.VerboseName().data())) {
-    return variables_map_[argument.VerboseName().data()].as<std::string>();
+  if (variables_map_.count(argument.Name().data())) {
+    return variables_map_[argument.Name().data()].as<std::string>();
   }
 
   return std::string{};
 }
 
 auto CommandLineParser::HasArgument(const CommandLineArgument& argument) const -> bool {
-  return variables_map_.count(argument.ShortName().data()) != 0 ||
-    variables_map_.count(argument.VerboseName().data()) != 0;
+  return variables_map_.count(argument.Name().data()) != 0;
 }
 
 auto CommandLineParser::HelpMessage() const noexcept -> std::string {
@@ -44,6 +41,22 @@ auto CommandLineParser::HelpMessage() const noexcept -> std::string {
   stream << "Usage: [options]:" << std::endl;
   stream << options_description_ << std::endl;
   return stream.str();
+}
+
+auto CommandLineParser::HandleArgumentWithDependants(const CommandLineArgument& argument) -> void {
+  boost::program_options::options_description group;
+
+  for (const auto& argument : argument.ArgumentIfThereIsNoThis()) {
+    group.add_options()(argument.Name().data(), ArgumentMeta(argument), argument.Description().data());
+
+    if (argument.ArgumentIfThereIsNoThis().empty()) {
+      continue;
+    }
+
+    HandleArgumentWithDependants(argument);
+  }
+
+  options_description_.add(group);
 }
 
 auto CommandLineParser::ArgumentMeta(const CommandLineArgument& argument) const -> boost::program_options::typed_value<std::string>* {
@@ -58,22 +71,6 @@ auto CommandLineParser::ArgumentMeta(const CommandLineArgument& argument) const 
   }
 
   return meta;
-}
-
-auto CommandLineParser::Formatted(const CommandLineArgument& argument) const -> std::string {
-  if (!argument.ShortName().empty() && !argument.VerboseName().empty()) {
-    return argument.ShortName() + "," + argument.VerboseName();
-  }
-
-  if (!argument.ShortName().empty()) {
-    return argument.ShortName();
-  }
-
-  if (!argument.VerboseName().empty()) {
-    return argument.VerboseName();
-  }
-
-  throw std::invalid_argument{ "Invalid command line argument: there is no short and verbose version of the argument" };
 }
 
 }

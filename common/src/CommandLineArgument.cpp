@@ -2,16 +2,38 @@
 
 namespace common {
 
-CommandLineArgument::CommandLineArgument(const std::string& short_name,
-                                         const std::string& verbose_name,
-                                         const std::string& description,
-                                         const std::string& default_value,
-                                         bool required)
-  : short_name_(short_name),
-    verbose_name_(verbose_name),
+CommandLineArgument::CommandLineArgument(const std::string& name, const std::string& description)
+  : name_(name),
     description_(description),
-    default_value_(default_value),
-    is_required_(required) {}
+    required_(false) {}
+
+auto CommandLineArgument::SetDefaultValue(const std::string& value) noexcept -> void {
+  default_value_ = value;
+}
+
+auto CommandLineArgument::SetRequired(bool value) noexcept -> void {
+  required_ = value;
+}
+
+auto CommandLineArgument::SetValueless(bool value) noexcept -> void {
+  valueless_ = value;
+}
+
+auto CommandLineArgument::AddArgumentIfThereIsThis(const CommandLineArgument& argument) -> void {
+  args_if_there_is_this_.push_back(argument);
+}
+
+auto CommandLineArgument::ArgumentIfThereIsThis() const noexcept -> const std::vector<CommandLineArgument>& {
+  return args_if_there_is_this_;
+}
+
+auto CommandLineArgument::AddArgumentIfThereIsNoThis(const CommandLineArgument& argument) -> void {
+  args_if_there_is_no_this_.push_back(argument);
+}
+
+auto CommandLineArgument::ArgumentIfThereIsNoThis() const noexcept -> const std::vector<CommandLineArgument>& {
+  return args_if_there_is_no_this_;
+}
 
 auto CommandLineArgument::DefaultValue() const noexcept -> const std::string& {
   return default_value_;
@@ -21,16 +43,16 @@ auto CommandLineArgument::Description() const noexcept -> const std::string& {
   return description_;
 }
 
-auto CommandLineArgument::ShortName() const noexcept -> const std::string& {
-  return short_name_;
-}
-
-auto CommandLineArgument::VerboseName() const noexcept -> const std::string& {
-  return verbose_name_;
+auto CommandLineArgument::Name() const noexcept -> const std::string& {
+  return name_;
 }
 
 auto CommandLineArgument::IsRequired() const noexcept -> bool {
-  return is_required_;
+  return required_;
+}
+
+auto CommandLineArgument::IsValueless() const noexcept -> bool {
+  return valueless_;
 }
 
 }

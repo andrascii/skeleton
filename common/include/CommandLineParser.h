@@ -14,7 +14,7 @@ class CommandLineParser final {
   auto HelpMessage() const noexcept -> std::string;
 
  private:
-  auto Formatted(const CommandLineArgument& argument) const -> std::string;
+  auto HandleArgumentWithDependants(const CommandLineArgument& argument) -> void;
   auto ArgumentMeta(const CommandLineArgument& argument) const -> boost::program_options::typed_value<std::string>*;
 
  private:

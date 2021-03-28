@@ -53,8 +53,10 @@
 #include <spdlog/sinks/daily_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-using namespace std::chrono_literals;
-using namespace std::string_literals;
+//
+// tl::expected
+//
+#include <expected.hpp>
 
 #ifdef _WIN32
 #define USE_WINDOWS_SET_THREAD_NAME_HACK
@@ -64,3 +66,6 @@ using namespace std::string_literals;
 #else
 #include <sys/prctl.h>
 #endif
+
+using namespace std::chrono_literals;
+using namespace std::string_literals;

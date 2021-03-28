@@ -32,18 +32,20 @@ find_package(spdlog REQUIRED)
 #
 # project variables
 #
-set(DATA_API_LIB dataapi)
+set(EVENT_LIB event)
+set(ECHO_LIB echo)
 set(SKELETON_APP skeleton)
-set(DATA_API_TESTS dataapitests)
+set(ECHO_LIB_TESTS echotests)
 set(COMMON_LIB common)
 
 add_subdirectory(${COMMON_LIB})
-add_subdirectory(${DATA_API_LIB})
+add_subdirectory(${EVENT_LIB})
+add_subdirectory(${ECHO_LIB})
 add_subdirectory(${SKELETON_APP})
 
 if (BUILD_TESTS)
   enable_testing()
-  add_subdirectory(${DATA_API_TESTS})
+  add_subdirectory(${ECHO_LIB_TESTS})
 endif()
 
 include(InstallRequiredSystemLibraries)
